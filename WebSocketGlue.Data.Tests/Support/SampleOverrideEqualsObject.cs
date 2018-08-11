@@ -1,4 +1,4 @@
-﻿namespace WebSocketGlue.Data.Tests {
+﻿namespace WebSocketGlue.Data.Tests.Support {
   public class SampleOverrideEqualsObject : EqualsOverride {
     public string Prop1 {get;set;}
     public object Prop2 {get;set;}

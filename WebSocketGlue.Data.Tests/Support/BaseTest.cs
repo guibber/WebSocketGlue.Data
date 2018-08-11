@@ -7,7 +7,7 @@ using AutoFixture;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace WebSocketGlue.Data.Tests {
+namespace WebSocketGlue.Data.Tests.Support {
   public class BaseTest {
     protected BaseTest() {
       Fixture = new Fixture();

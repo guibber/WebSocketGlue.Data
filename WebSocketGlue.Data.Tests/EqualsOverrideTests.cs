@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WebSocketGlue.Data.Tests.Support;
 
 namespace WebSocketGlue.Data.Tests {
   [TestClass]
@@ -45,19 +46,19 @@ namespace WebSocketGlue.Data.Tests {
                                  new SampleOverrideEqualsObject()),
                               false);
       yield return BA<object>("equalsoverride object arrays with nested equalsoverride objects are equal",
-                              BA(new SampleOverrideEqualsObject { Prop1 = "1", Prop2 = new SampleOverrideEqualsObject { Prop1 = "12", Prop2 = null} },
-                                 new SampleOverrideEqualsObject { Prop1 = "2", Prop2 = 2 },
+                              BA(new SampleOverrideEqualsObject {Prop1 = "1", Prop2 = new SampleOverrideEqualsObject {Prop1 = "12", Prop2 = null}},
+                                 new SampleOverrideEqualsObject {Prop1 = "2", Prop2 = 2},
                                  new SampleOverrideEqualsObject()),
-                              BA(new SampleOverrideEqualsObject { Prop1 = "1", Prop2 = new SampleOverrideEqualsObject { Prop1 = "12", Prop2 = null } },
-                                 new SampleOverrideEqualsObject { Prop1 = "2", Prop2 = 2 },
+                              BA(new SampleOverrideEqualsObject {Prop1 = "1", Prop2 = new SampleOverrideEqualsObject {Prop1 = "12", Prop2 = null}},
+                                 new SampleOverrideEqualsObject {Prop1 = "2", Prop2 = 2},
                                  new SampleOverrideEqualsObject()),
                               true);
       yield return BA<object>("equalsoverride object arrays with different nested objects are not equal",
-                              BA(new SampleOverrideEqualsObject { Prop1 = "1", Prop2 = new SampleOverrideEqualsObject { Prop1 = "13", Prop2 = 6 } },
-                                 new SampleOverrideEqualsObject { Prop1 = "2", Prop2 = 2 },
+                              BA(new SampleOverrideEqualsObject {Prop1 = "1", Prop2 = new SampleOverrideEqualsObject {Prop1 = "13", Prop2 = 6}},
+                                 new SampleOverrideEqualsObject {Prop1 = "2", Prop2 = 2},
                                  new SampleOverrideEqualsObject()),
-                              BA(new SampleOverrideEqualsObject { Prop1 = "1", Prop2 = new SampleOverrideEqualsObject { Prop1 = "13", Prop2 = 5} },
-                                 new SampleOverrideEqualsObject { Prop1 = "2", Prop2 = 2 },
+                              BA(new SampleOverrideEqualsObject {Prop1 = "1", Prop2 = new SampleOverrideEqualsObject {Prop1 = "13", Prop2 = 5}},
+                                 new SampleOverrideEqualsObject {Prop1 = "2", Prop2 = 2},
                                  new SampleOverrideEqualsObject()),
                               false);
     }

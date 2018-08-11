@@ -1,5 +1,6 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WebSocketGlue.Data.Tests.Support;
 using WebSocketGlue.Data.Utils;
 
 namespace WebSocketGlue.Data.Tests {
