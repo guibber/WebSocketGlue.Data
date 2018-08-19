@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketGlue.Data", "WebSocketGlue.Data\WebSocketGlue.Data.csproj", "{D1AC56E1-95D0-4D0B-AAE3-4125413EA191}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketGlue.Data.Tests", "WebSocketGlue.Data.Tests\WebSocketGlue.Data.Tests.csproj", "{45BB9762-A77B-4022-9C45-617DDF6D5EC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketGlue.Data.Tests", "WebSocketGlue.Data.Tests\WebSocketGlue.Data.Tests.csproj", "{45BB9762-A77B-4022-9C45-617DDF6D5EC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAssembly", "TestAssembly\TestAssembly.csproj", "{468479A7-B1A7-4B03-B560-7CF76A0C62F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{45BB9762-A77B-4022-9C45-617DDF6D5EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45BB9762-A77B-4022-9C45-617DDF6D5EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45BB9762-A77B-4022-9C45-617DDF6D5EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{468479A7-B1A7-4B03-B560-7CF76A0C62F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{468479A7-B1A7-4B03-B560-7CF76A0C62F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{468479A7-B1A7-4B03-B560-7CF76A0C62F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{468479A7-B1A7-4B03-B560-7CF76A0C62F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TestAssembly\TestAssembly.csproj" />
     <ProjectReference Include="..\WebSocketGlue.Data\WebSocketGlue.Data.csproj" />
   </ItemGroup>
 

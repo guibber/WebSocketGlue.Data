@@ -26,7 +26,7 @@ namespace WebSocketGlue.Data.Utils {
 
     private static JsonSerializer BuildSerializer() {
       return new JsonSerializer {
-                                  TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full,
+                                  TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
                                   TypeNameHandling = TypeNameHandling.All
                                 };
     }

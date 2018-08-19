@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -20,9 +21,12 @@ namespace WebSocketGlue.Data.Utils {
         return obj;
       if (obj["$type"].ToString().StartsWith("System.Object") && obj.Count == 1 || obj.Count == 0)
         return new object();
+      //var ass = ResolveAssemblyWithoutVersion(obj["$type"].ToString());
+      //var ass = TypeIdentifiers.TypeSpec.Parse(obj["$type"].ToString());
+      //var assm = Assembly.Load(new AssemblyName(ass.AssemblyName));
       var type = Type.GetType(obj["$type"].ToString());
       return type != null ? obj.ToObject(type, serializer) : obj;
-    }
+     }
 
     public override bool CanConvert(Type objectType) {
       return objectType == typeof(object);
