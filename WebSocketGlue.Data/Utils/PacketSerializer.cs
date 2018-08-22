@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -14,6 +15,10 @@ namespace WebSocketGlue.Data.Utils {
       }
     }
 
+    public T Deserialize(string packet) {
+      return JsonConvert.DeserializeObject<T>(packet, _Settings);
+    }
+
     public void Serialize(T packet, MemoryStream stream) {
       stream.Seek(0, SeekOrigin.Begin);
       using (var writer = new StreamWriter(stream, Encoding.UTF8, 8192, true))
@@ -21,13 +26,18 @@ namespace WebSocketGlue.Data.Utils {
         BuildSerializer().Serialize(jsonWriter, packet, typeof(T));
         jsonWriter.Flush();
       }
+
       stream.Seek(0, SeekOrigin.Begin);
+    }
+
+    public string Serialize(T packet) {
+      return JsonConvert.SerializeObject(packet, packet.GetType(), _Settings);
     }
 
     private static JsonSerializer BuildSerializer() {
       return new JsonSerializer {
-                                  TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
-                                  TypeNameHandling = TypeNameHandling.All
+                                  TypeNameAssemblyFormatHandling = _Settings.TypeNameAssemblyFormatHandling,
+                                  TypeNameHandling = _Settings.TypeNameHandling
                                 };
     }
 
@@ -38,5 +48,11 @@ namespace WebSocketGlue.Data.Utils {
     }
 
     private static readonly SafeUnknownTypeConverter _Converter = new SafeUnknownTypeConverter();
+
+    private static readonly JsonSerializerSettings _Settings = new JsonSerializerSettings {
+                                                                                            TypeNameHandling = TypeNameHandling.All,
+                                                                                            TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
+                                                                                            Converters = new List<JsonConverter> {_Converter}
+                                                                                          };
   }
 }
