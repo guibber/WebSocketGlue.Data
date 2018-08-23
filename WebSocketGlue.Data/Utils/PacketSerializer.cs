@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -16,7 +15,7 @@ namespace WebSocketGlue.Data.Utils {
     }
 
     public T Deserialize(string packet) {
-      return JsonConvert.DeserializeObject<T>(packet, _Settings);
+      return JsonConvert.DeserializeObject<T>(packet, Settings._JsonSerializerSettings);
     }
 
     public void Serialize(T packet, MemoryStream stream) {
@@ -31,28 +30,20 @@ namespace WebSocketGlue.Data.Utils {
     }
 
     public string Serialize(T packet) {
-      return JsonConvert.SerializeObject(packet, packet.GetType(), _Settings);
+      return JsonConvert.SerializeObject(packet, packet.GetType(), Settings._JsonSerializerSettings);
     }
 
     private static JsonSerializer BuildSerializer() {
       return new JsonSerializer {
-                                  TypeNameAssemblyFormatHandling = _Settings.TypeNameAssemblyFormatHandling,
-                                  TypeNameHandling = _Settings.TypeNameHandling
+                                  TypeNameAssemblyFormatHandling = Settings._JsonSerializerSettings.TypeNameAssemblyFormatHandling,
+                                  TypeNameHandling = Settings._JsonSerializerSettings.TypeNameHandling
                                 };
     }
 
     private static JsonSerializer BuildSerializerWithSafeConverter() {
       var s = BuildSerializer();
-      s.Converters.Add(_Converter);
+      s.Converters.Add(Settings._Converter);
       return s;
     }
-
-    private static readonly SafeUnknownTypeConverter _Converter = new SafeUnknownTypeConverter();
-
-    private static readonly JsonSerializerSettings _Settings = new JsonSerializerSettings {
-                                                                                            TypeNameHandling = TypeNameHandling.All,
-                                                                                            TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
-                                                                                            Converters = new List<JsonConverter> {_Converter}
-                                                                                          };
   }
 }
