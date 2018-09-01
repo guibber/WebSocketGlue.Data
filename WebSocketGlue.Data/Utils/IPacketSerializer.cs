@@ -1,10 +1,10 @@
 ﻿using System.IO;
 
 namespace WebSocketGlue.Data.Utils {
-  public interface IPacketSerializer<T> {
-    T Deserialize(MemoryStream stream);
-    T Deserialize(string packet);
-    void Serialize(T packet, MemoryStream stream);
-    string Serialize(T packet);
+  public interface IPacketSerializer {
+    T Deserialize<T>(MemoryStream stream);
+    T Deserialize<T>(string packet);
+    void Serialize<T>(T packet, MemoryStream stream);
+    string Serialize<T>(T packet);
   }
 }

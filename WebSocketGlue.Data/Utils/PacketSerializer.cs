@@ -3,8 +3,8 @@ using System.Text;
 using Newtonsoft.Json;
 
 namespace WebSocketGlue.Data.Utils {
-  public class PacketSerializer<T> : IPacketSerializer<T> {
-    public T Deserialize(MemoryStream stream) {
+  public class PacketSerializer : IPacketSerializer {
+    public T Deserialize<T>(MemoryStream stream) {
       if (stream.Length == 0)
         return default(T);
       stream.Seek(0, SeekOrigin.Begin);
@@ -14,11 +14,11 @@ namespace WebSocketGlue.Data.Utils {
       }
     }
 
-    public T Deserialize(string packet) {
+    public T Deserialize<T>(string packet) {
       return JsonConvert.DeserializeObject<T>(packet, Settings._JsonSerializerSettings);
     }
 
-    public void Serialize(T packet, MemoryStream stream) {
+    public void Serialize<T>(T packet, MemoryStream stream) {
       stream.Seek(0, SeekOrigin.Begin);
       using (var writer = new StreamWriter(stream, Encoding.UTF8, 8192, true))
       using (var jsonWriter = new JsonTextWriter(writer)) {
@@ -29,7 +29,7 @@ namespace WebSocketGlue.Data.Utils {
       stream.Seek(0, SeekOrigin.Begin);
     }
 
-    public string Serialize(T packet) {
+    public string Serialize<T>(T packet) {
       return JsonConvert.SerializeObject(packet, packet.GetType(), Settings._JsonSerializerSettings);
     }
 

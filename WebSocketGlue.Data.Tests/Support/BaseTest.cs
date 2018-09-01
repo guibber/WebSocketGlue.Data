@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoFixture;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Newtonsoft.Json;
 
 namespace WebSocketGlue.Data.Tests.Support {
   public class BaseTest {
@@ -75,6 +76,14 @@ namespace WebSocketGlue.Data.Tests.Support {
         writer.Write(s);
         writer.Flush();
       }
+    }
+
+    protected void AE(object expected, object actual) {
+      Assert.AreEqual(expected, actual, GetAssertMessage(expected, actual));
+    }
+
+    private static string GetAssertMessage(object expected, object actual) {
+      return $"\r\nExpected:\r\n{JsonConvert.SerializeObject(expected, Formatting.Indented)}\r\nActual:\r\n{JsonConvert.SerializeObject(actual, Formatting.Indented)}";
     }
 
     protected async Task AssertThrowsWithMessageAsync<T>(Func<Task> func, string message) where T : Exception {

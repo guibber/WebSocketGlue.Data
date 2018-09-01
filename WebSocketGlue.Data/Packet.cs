@@ -20,7 +20,7 @@ namespace WebSocketGlue.Data {
     [DataMember]
     public string ConnectionId {get;set;}
     [DataMember]
-    public object Data {get;set;}
+    public string Data {get;set;}
 
     public override bool Equals(object obj) {
       if (!base.Equals(obj))
@@ -28,7 +28,7 @@ namespace WebSocketGlue.Data {
 
       var o = (Packet)obj;
       return Equals(ConnectionId, o.ConnectionId) &&
-             ObjectEquals(Data, o.Data);
+             Equals(Data, o.Data);
     }
 
     public override int GetHashCode() {
