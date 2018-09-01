@@ -1,3 +1,6 @@
-﻿namespace WebSocketGlue.Data {
+﻿using System.Runtime.Serialization;
+
+namespace WebSocketGlue.Data {
+  [DataContract(Namespace = "http://data.websocketglue.guibber.com/")]
   public class Ack : Packet { }
 }

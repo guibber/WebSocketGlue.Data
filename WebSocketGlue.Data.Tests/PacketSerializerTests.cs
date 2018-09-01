@@ -201,12 +201,12 @@ namespace WebSocketGlue.Data.Tests {
     }
 
     [TestMethod]
-    public void TestStreamSerializationAndDeserializationUnknownObjectType() {
+    public void TestStreamSerializationAndDeserializationNotReferencedType() {
       var obj = One<Request>();
       obj.Data = One<Packet>();
       using (var stream = new MemoryStream()) {
         mSerializer.Serialize(obj, stream);
-        var s = StreamToString(stream).Replace("WebSocketGlue.Data.Packet, WebSocketGlue.Data", "NotAvailable.Packet, NotAvailable");
+        var s = StreamToString(stream).Replace("WebSocketGlue.Data.Packet, WebSocketGlue.Data", "NotReferenced.Object, NotReferenced");
         using (var wstream = new MemoryStream()) {
           StringToStream(s, wstream);
           var actual = mSerializer.Deserialize(wstream);
@@ -219,12 +219,12 @@ namespace WebSocketGlue.Data.Tests {
     }
 
     [TestMethod]
-    public void TestStringSerializationAndDeserializationUnknownObjectType() {
+    public void TestStringSerializationAndDeserializationNotReferencedType() {
       var obj = One<Request>();
       obj.Data = One<Packet>();
 
       var s = mSerializer.Serialize(obj);
-      s = s.Replace("WebSocketGlue.Data.Packet, WebSocketGlue.Data", "NotAvailable.Packet, NotAvailable");
+      s = s.Replace("WebSocketGlue.Data.Packet, WebSocketGlue.Data", "NotReferenced.Object, NotReferenced");
       var actual = mSerializer.Deserialize(s);
       dynamic actualData = actual.Data;
       Assert.AreEqual(obj.ConnectionId, actual.ConnectionId);
@@ -263,19 +263,6 @@ namespace WebSocketGlue.Data.Tests {
       Assert.AreEqual("TestAssembly.TestClass1", actualData.GetType().ToString());
       Assert.AreEqual(((TestClass1)obj.Data).Prop1.ToString(), actualData.Prop1.ToString());
       Assert.AreEqual(((TestClass1)obj.Data).Prop2, actualData.Prop2.ToString());
-    }
-
-    private static string StreamToString(Stream stream) {
-      using (var reader = new StreamReader(stream, Encoding.UTF8, false, 8192, true)) {
-        return reader.ReadToEnd();
-      }
-    }
-
-    private static void StringToStream(string s, Stream stream) {
-      using (var writer = new StreamWriter(stream, Encoding.UTF8, 8192, true)) {
-        writer.Write(s);
-        writer.Flush();
-      }
     }
 
     [TestInitialize]

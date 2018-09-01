@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
@@ -60,6 +62,19 @@ namespace WebSocketGlue.Data.Tests.Support {
 
     protected static Task<T> Tsk<T>(T obj) {
       return Task.FromResult(obj);
+    }
+
+    protected static string StreamToString(Stream stream) {
+      using (var reader = new StreamReader(stream, Encoding.UTF8, false, 8192, true)) {
+        return reader.ReadToEnd();
+      }
+    }
+
+    protected static void StringToStream(string s, Stream stream) {
+      using (var writer = new StreamWriter(stream, Encoding.UTF8, 8192, true)) {
+        writer.Write(s);
+        writer.Flush();
+      }
     }
 
     protected async Task AssertThrowsWithMessageAsync<T>(Func<Task> func, string message) where T : Exception {

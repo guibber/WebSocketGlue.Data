@@ -1,5 +1,9 @@
-﻿namespace WebSocketGlue.Data {
+﻿using System.Runtime.Serialization;
+
+namespace WebSocketGlue.Data {
+  [DataContract(Namespace = "http://data.websocketglue.guibber.com/")]
   public class Error : Packet {
+    [DataMember]
     public string Message {get;set;}
 
     public override bool Equals(object obj) {
