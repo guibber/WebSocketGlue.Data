@@ -185,6 +185,13 @@ namespace WebSocketGlue.Data.Tests {
       AE(obj.Prop2, actual.Prop2.ToString());
     }
 
+    [TestMethod]
+    public void TestStringSerializationAndDeserializationNonJson() {
+      var obj = "string_data";
+      var actual = mSerializer.Serialize(obj);
+      AE(obj, mSerializer.Deserialize<dynamic>(actual));
+    }
+
     [TestInitialize]
     public void TestInitialize() {
       mSerializer = new PacketSerializer();

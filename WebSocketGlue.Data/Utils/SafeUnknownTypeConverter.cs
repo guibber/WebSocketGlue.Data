@@ -24,7 +24,7 @@ namespace WebSocketGlue.Data.Utils {
       //var ass = ResolveAssemblyWithoutVersion(obj["$type"].ToString());
       //var ass = TypeIdentifiers.TypeSpec.Parse(obj["$type"].ToString());
       //var assm = Assembly.Load(new AssemblyName(ass.AssemblyName));
-      var type = Type.GetType(obj["$type"].ToString());
+      var type = Type.GetType(obj["$type"].ToString(), false);
       return type != null ? obj.ToObject(type, serializer) : obj;
      }
 
